@@ -12,7 +12,7 @@ def get_filecontent(fileName):
             # read() 每次读取整个文件，将文件内容放到一个字符串变量中
             content = f.read()
             return content #文本
-    except (FileNotFoundError,PermissionError):
+    except (FileNotFoundError):
         print("没有找到文件")
         return
 
@@ -32,8 +32,8 @@ def handle(socket,inputs):
     if get_filecontent(recv_data):
         myfile = get_filecontent(recv_data)
         put_block(socket, myfile)
-    else: # 发送0代表没有找到文件
-        socket.send('0'.encode("utf-8"))
+    else: # 发送''代表没有找到文件
+        put_block(socket,''.encode("utf-8"))
 
 def main():
     server = socket(AF_INET, SOCK_STREAM) # 创建socket

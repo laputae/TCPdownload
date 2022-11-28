@@ -22,10 +22,13 @@ def main():
         client.send(fileName.encode("utf-8"))  # 发送文件名
         # 接收服务器发送过来的数据
         content=get_block(client)
-        # 以二进制格式打开一个文件只用于写入
-        with open("D:/TCPreceive/" + savename, "wb") as f:
-            f.write(content)  # 写入文本
-        print("下载完成")
+        if content:
+            # 以二进制格式打开一个文件只用于写入
+            with open("D:/TCPreceive/" + savename, "wb") as f:
+                f.write(content)  # 写入文本
+            print("下载完成")
+        else:
+            print('文件不存在')
 
     # 关闭套接字
     client.close()
