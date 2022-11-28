@@ -30,7 +30,8 @@ def handle(socket,inputs):
     print("客户端请求下载的文件名为:" + recv_data)
     # 获取并发送文件长度+内容
     if get_filecontent(recv_data):
-        socket.send(get_filecontent(recv_data))
+        myfile = get_filecontent(recv_data)
+        put_block(socket, myfile)
     else: # 发送0代表没有找到文件
         socket.send('0'.encode("utf-8"))
 
