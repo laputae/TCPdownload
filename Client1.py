@@ -11,9 +11,14 @@ def main():
         name = input("请输入要下载的的文件名（输入quit退出）：")  # 提示用户输入文件名
         # 用户退出
         if name == 'quit':
+            client.send(name.encode("utf-8"))
             break
-        fileName = name.split(" ", 1)[0]
-        savename = name.split(" ", 1)[1]
+        try:
+            fileName = name.split(" ", 1)[0]
+            savename = name.split(" ", 1)[1]
+        except IndexError:
+            print('输入有误')
+            continue
         client.send(fileName.encode("utf-8"))  # 发送文件名
         # 接收服务器发送过来的数据
         content=get_block(client)

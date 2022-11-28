@@ -12,7 +12,7 @@ def get_filecontent(fileName):
             # read() 每次读取整个文件，将文件内容放到一个字符串变量中
             content = f.read()
             return content #文本
-    except FileNotFoundError:
+    except (FileNotFoundError,PermissionError):
         print("没有找到文件")
         return
 
